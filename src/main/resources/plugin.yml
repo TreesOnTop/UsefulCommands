@@ -1,0 +1,10 @@
+name: UsefulCommands
+version: '${project.version}'
+main: com.github.treesontop.usefulcommands.UsefulCommands
+commands:
+  fly:
+    description: toggles flight for a player
+    usage: /<fly> [player]
+  reload:
+    description: reloads the plugins config
+    usage: /<reload>
