@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-public class Fly implements CommandExecutor {
+public class Feed implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         YamlConfiguration config = ConfigHandler.getConfig();
@@ -17,27 +17,29 @@ public class Fly implements CommandExecutor {
         String permissionMessage = ChatColor.translateAlternateColorCodes('&', config.getString("PermissionMessage"));
         if (args.length > 0) {
             try {
-                if (sender.hasPermission("usefulcommands.fly.others")) {
+                if (sender.hasPermission("usefulcommands.feed.others")) {
                     Player target = Bukkit.getPlayer(args[0]);
-                    target.setAllowFlight(!(target.getAllowFlight()));
-                    target.sendMessage(prefix + "Your flight has been set to " + target.getAllowFlight());
-                    sender.sendMessage(prefix + target.getName() + "'s flight has been set to " + target.getAllowFlight());
+                    target.setFoodLevel(20);
+                    target.sendMessage(prefix + "You have been fed");
+                    sender.sendMessage(prefix + target.getName() + " has been fed");
                 } else {
                     sender.sendMessage(permissionMessage);
                 }
             } catch (Exception e) {
                 sender.sendMessage(prefix + args[0] + " is not a valid player");
             }
-        } else if (sender instanceof Player) {
-            if (sender.hasPermission("usefulcommands.fly")) {
-                Player target = (Player) sender;
-                target.setAllowFlight(!(target.getAllowFlight()));
-                target.sendMessage(prefix + "Your flight has been set to " + target.getAllowFlight());
+        } else {
+            if (sender.hasPermission("usefulcommands.feed")) {
+                if (sender instanceof Player) {
+                    Player target = (Player) sender;
+                    target.setFoodLevel(20);
+                    target.sendMessage(prefix + "You have been fed");
+                } else {
+                    sender.sendMessage(prefix + "You must be a player to use this command");
+                }
             } else {
                 sender.sendMessage(permissionMessage);
             }
-        } else {
-            sender.sendMessage(prefix + "You must be a player to use this command");
         }
         return true;
     }

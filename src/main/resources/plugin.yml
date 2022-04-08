@@ -4,7 +4,17 @@ main: com.github.treesontop.usefulcommands.UsefulCommands
 commands:
   fly:
     description: toggles flight for a player
-    usage: /<fly> [player]
+    usage: /fly [player]
   reload:
     description: reloads the plugins config
-    usage: /<reload>
+    usage: /reload
+  broadcast:
+    description: broadcasts a message to all players
+    usage: /broadcast <message>
+    alias: /bc
+  heal:
+    description: heals a player
+    usage: /heal [player]
+  feed:
+    description: feeds a player
+    usage: /feed [player]

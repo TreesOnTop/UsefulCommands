@@ -1,11 +1,11 @@
 package com.github.treesontop.usefulcommands;
 
+import com.github.treesontop.usefulcommands.commands.Broadcast;
 import com.github.treesontop.usefulcommands.commands.Fly;
+import com.github.treesontop.usefulcommands.commands.Heal;
 import com.github.treesontop.usefulcommands.commands.Reload;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-
-;
 
 @SuppressWarnings("unused")
 public final class UsefulCommands extends JavaPlugin {
@@ -25,6 +25,8 @@ public final class UsefulCommands extends JavaPlugin {
         ConfigHandler.reloadConfig();
         this.getCommand("fly").setExecutor(new Fly());
         this.getCommand("reload").setExecutor(new Reload());
+        this.getCommand("broadcast").setExecutor(new Broadcast());
+        this.getCommand("heal").setExecutor(new Heal());
     }
 
     @Override
