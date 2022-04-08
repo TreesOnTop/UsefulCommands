@@ -1,11 +1,9 @@
 package com.github.treesontop.usefulcommands;
 
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 
-@SuppressWarnings("ResultOfMethodCallIgnored")
 public class ConfigHandler {
     public static File getData(){
         File file = new File(UsefulCommands.getMainClass().getDataFolder(), "data.yml");
