@@ -15,32 +15,26 @@ public class Feed implements CommandExecutor {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
         String permissionMessage = ChatColor.translateAlternateColorCodes('&', config.getString("PermissionMessage"));
-        if (args.length > 0) {
+        if (args.length > 0 && sender.hasPermission("usefulcommands.feed.others")) {
             try {
-                if (sender.hasPermission("usefulcommands.feed.others")) {
-                    Player target = Bukkit.getPlayer(args[0]);
-                    target.setFoodLevel(20);
-                    target.sendMessage(prefix + "You have been fed");
-                    sender.sendMessage(prefix + target.getName() + " has been fed");
-                } else {
-                    sender.sendMessage(permissionMessage);
-                }
+                feed(Bukkit.getPlayer(args[0]));
+                sender.sendMessage(prefix + Bukkit.getPlayer(args[0]).getName() + " has been fed");
             } catch (Exception e) {
                 sender.sendMessage(prefix + args[0] + " is not a valid player");
             }
+        } else if (sender instanceof Player && args.length == 0 && sender.hasPermission("usefulcommands.feed")) {
+            feed((Player) sender);
+        } else if (!(sender instanceof Player)) {
+            sender.sendMessage(prefix + "You must be a player to use this command");
         } else {
-            if (sender.hasPermission("usefulcommands.feed")) {
-                if (sender instanceof Player) {
-                    Player target = (Player) sender;
-                    target.setFoodLevel(20);
-                    target.sendMessage(prefix + "You have been fed");
-                } else {
-                    sender.sendMessage(prefix + "You must be a player to use this command");
-                }
-            } else {
-                sender.sendMessage(permissionMessage);
-            }
+            sender.sendMessage(permissionMessage);
         }
         return true;
+    }
+    private void feed(Player target) {
+        YamlConfiguration config = ConfigHandler.getConfig();
+        String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
+        target.setFoodLevel(20);
+        target.sendMessage(prefix + "You have been fed");
     }
 }

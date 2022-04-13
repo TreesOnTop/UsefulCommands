@@ -14,16 +14,11 @@ public class Reload implements CommandExecutor {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
         String permissionMessage = ChatColor.translateAlternateColorCodes('&', config.getString("PermissionMessage"));
-        if (sender instanceof Player) {
-            if (sender.hasPermission("usefulcommands.reload")) {
-                ConfigHandler.reloadConfig();
-                sender.sendMessage(prefix + "Config reloaded");
-            } else {
-                sender.sendMessage(permissionMessage);
-            }
-        } else {
+        if (sender.hasPermission("usefulcommands.reload")) {
             ConfigHandler.reloadConfig();
             sender.sendMessage(prefix + "Config reloaded");
+        } else {
+            sender.sendMessage(permissionMessage);
         }
         return true;
     }

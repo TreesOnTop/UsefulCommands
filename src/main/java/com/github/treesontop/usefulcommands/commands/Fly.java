@@ -15,30 +15,26 @@ public class Fly implements CommandExecutor {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
         String permissionMessage = ChatColor.translateAlternateColorCodes('&', config.getString("PermissionMessage"));
-        if (args.length > 0) {
+        if (args.length > 0 && sender.hasPermission("usefulcommands.fly.others")) {
             try {
-                if (sender.hasPermission("usefulcommands.fly.others")) {
-                    Player target = Bukkit.getPlayer(args[0]);
-                    target.setAllowFlight(!(target.getAllowFlight()));
-                    target.sendMessage(prefix + "Your flight has been set to " + target.getAllowFlight());
-                    sender.sendMessage(prefix + target.getName() + "'s flight has been set to " + target.getAllowFlight());
-                } else {
-                    sender.sendMessage(permissionMessage);
-                }
+                fly(Bukkit.getPlayer(args[0]));
+                sender.sendMessage(prefix + Bukkit.getPlayer(args[0]).getName() + "'s flight has been set to " + Bukkit.getPlayer(args[0]).getAllowFlight());
             } catch (Exception e) {
                 sender.sendMessage(prefix + args[0] + " is not a valid player");
             }
-        } else if (sender instanceof Player) {
-            if (sender.hasPermission("usefulcommands.fly")) {
-                Player target = (Player) sender;
-                target.setAllowFlight(!(target.getAllowFlight()));
-                target.sendMessage(prefix + "Your flight has been set to " + target.getAllowFlight());
-            } else {
-                sender.sendMessage(permissionMessage);
-            }
-        } else {
+        } else if (sender instanceof Player && args.length == 0 && sender.hasPermission("usefulcommands.fly")) {
+            fly((Player) sender);
+        } else if (!(sender instanceof Player)) {
             sender.sendMessage(prefix + "You must be a player to use this command");
+        } else {
+            sender.sendMessage(permissionMessage);
         }
         return true;
+    }
+    private void fly(Player target) {
+        YamlConfiguration config = ConfigHandler.getConfig();
+        String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
+        target.setAllowFlight(!(target.getAllowFlight()));
+        target.sendMessage(prefix + "Your flight has been set to " + target.getAllowFlight());
     }
 }

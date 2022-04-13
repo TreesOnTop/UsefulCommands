@@ -15,32 +15,26 @@ public class Heal implements CommandExecutor {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
         String permissionMessage = ChatColor.translateAlternateColorCodes('&', config.getString("PermissionMessage"));
-        if (args.length > 0) {
+        if (args.length > 0 && sender.hasPermission("usefulcommands.heal.others")) {
             try {
-                if (sender.hasPermission("usefulcommands.heal.others")) {
-                    Player target = Bukkit.getPlayer(args[0]);
-                    target.setHealth(target.getMaxHealth());
-                    target.sendMessage(prefix + "You have been healed");
-                    sender.sendMessage(prefix + target.getName() + " has been healed");
-                } else {
-                    sender.sendMessage(permissionMessage);
-                }
+                heal(Bukkit.getPlayer(args[0]));
+                sender.sendMessage(prefix + Bukkit.getPlayer(args[0]).getName() + " has been healed");
             } catch (Exception e) {
                 sender.sendMessage(prefix + args[0] + " is not a valid player");
             }
+        } else if (sender instanceof Player && args.length == 0 && sender.hasPermission("usefulcommands.heal")) {
+            heal((Player) sender);
+        } else if (!(sender instanceof Player)) {
+            sender.sendMessage(prefix + "You must be a player to use this command");
         } else {
-            if (sender.hasPermission("usefulcommands.heal")) {
-                if (sender instanceof Player) {
-                    Player target = (Player) sender;
-                    target.setHealth(target.getMaxHealth());
-                    target.sendMessage(prefix + "You have been healed");
-                } else {
-                    sender.sendMessage(prefix + "You must be a player to use this command");
-                }
-            } else {
-                sender.sendMessage(permissionMessage);
-            }
+            sender.sendMessage(permissionMessage);
         }
         return true;
+    }
+    private void heal(Player target) {
+        YamlConfiguration config = ConfigHandler.getConfig();
+        String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
+        target.setHealth(target.getMaxHealth());
+        target.sendMessage(prefix + "You have been healed");
     }
 }

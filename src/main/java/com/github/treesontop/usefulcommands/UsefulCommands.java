@@ -1,10 +1,8 @@
 package com.github.treesontop.usefulcommands;
 
-import com.github.treesontop.usefulcommands.commands.Broadcast;
-import com.github.treesontop.usefulcommands.commands.Fly;
-import com.github.treesontop.usefulcommands.commands.Heal;
-import com.github.treesontop.usefulcommands.commands.Reload;
+import com.github.treesontop.usefulcommands.commands.*;
 import org.bukkit.Bukkit;
+import org.bukkit.material.EnderChest;
 import org.bukkit.plugin.java.JavaPlugin;
 
 @SuppressWarnings("unused")
@@ -27,11 +25,10 @@ public final class UsefulCommands extends JavaPlugin {
         this.getCommand("reload").setExecutor(new Reload());
         this.getCommand("broadcast").setExecutor(new Broadcast());
         this.getCommand("heal").setExecutor(new Heal());
-    }
-
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
+        this.getCommand("feed").setExecutor(new Feed());
+        this.getCommand("clearchat").setExecutor(new ClearChat());
+        this.getCommand("enderchest").setExecutor(new Enderchest());
+        Permissions.register();
     }
     private static UsefulCommands mainClass;
     public static UsefulCommands getMainClass() { return mainClass; }

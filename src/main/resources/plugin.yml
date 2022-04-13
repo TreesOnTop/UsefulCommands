@@ -1,6 +1,7 @@
 name: UsefulCommands
 version: '${project.version}'
 main: com.github.treesontop.usefulcommands.UsefulCommands
+softdepend: [LuckPerms]
 commands:
   fly:
     description: toggles flight for a player
@@ -11,10 +12,17 @@ commands:
   broadcast:
     description: broadcasts a message to all players
     usage: /broadcast <message>
-    alias: /bc
+    aliases: [bc]
   heal:
     description: heals a player
     usage: /heal [player]
   feed:
     description: feeds a player
     usage: /feed [player]
+  clearchat:
+    description: clears the chat
+    usage: /clearchat
+  enderchest:
+    description: opens the enderchest of a player
+    usage: /enderchest [player]
+    aliases: [ec, echest]
