@@ -5,6 +5,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.material.EnderChest;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Objects;
+
 @SuppressWarnings("unused")
 public final class UsefulCommands extends JavaPlugin {
 
@@ -21,13 +23,13 @@ public final class UsefulCommands extends JavaPlugin {
             Bukkit.getConsoleSender().sendMessage("§cWarning");
         }
         ConfigHandler.reloadConfig();
-        this.getCommand("fly").setExecutor(new Fly());
-        this.getCommand("reload").setExecutor(new Reload());
-        this.getCommand("broadcast").setExecutor(new Broadcast());
-        this.getCommand("heal").setExecutor(new Heal());
-        this.getCommand("feed").setExecutor(new Feed());
-        this.getCommand("clearchat").setExecutor(new ClearChat());
-        this.getCommand("enderchest").setExecutor(new Enderchest());
+        Objects.requireNonNull(this.getCommand("fly")).setExecutor(new Fly());
+        Objects.requireNonNull(this.getCommand("reload")).setExecutor(new Reload());
+        Objects.requireNonNull(this.getCommand("broadcast")).setExecutor(new Broadcast());
+        Objects.requireNonNull(this.getCommand("heal")).setExecutor(new Heal());
+        Objects.requireNonNull(this.getCommand("feed")).setExecutor(new Feed());
+        Objects.requireNonNull(this.getCommand("clearchat")).setExecutor(new ClearChat());
+        Objects.requireNonNull(this.getCommand("enderchest")).setExecutor(new Enderchest());
         Permissions.register();
     }
     private static UsefulCommands mainClass;
