@@ -15,23 +15,18 @@ public class Broadcast implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
-        String permissionMessage = ChatColor.translateAlternateColorCodes('&', config.getString("PermissionMessage"));
         List<String> broadcast = config.getStringList("Broadcast");
-        if (sender.hasPermission("usefulcommands.broadcast")) {
-            if (args.length == 0) {
-                sender.sendMessage(prefix + "You must specify a message to broadcast.");
-            } else {
-                for (int x = 0; x < broadcast.size(); x++) {
-                    int value = x;
-                    Bukkit.getOnlinePlayers().forEach(player -> player.sendMessage(
-                            ChatColor.translateAlternateColorCodes('&', broadcast.get(value)
-                            .replace("<broadcast-message>", String.join(" ", args))
-                            .replace("<broadcast-sender>", sender.getName()))
-                    ));
-                }
-            }
+        if (args.length == 0) {
+            sender.sendMessage(prefix + "You must specify a message to broadcast.");
         } else {
-            sender.sendMessage(permissionMessage);
+            for (int x = 0; x < broadcast.size(); x++) {
+                int value = x;
+                Bukkit.getOnlinePlayers().forEach(player -> player.sendMessage(
+                        ChatColor.translateAlternateColorCodes('&', broadcast.get(value)
+                                .replace("<broadcast-message>", String.join(" ", args))
+                                .replace("<broadcast-sender>", sender.getName()))
+                ));
+            }
         }
         return true;
     }

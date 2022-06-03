@@ -6,14 +6,15 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 
-public class Reload implements CommandExecutor {
+public class Suicide implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
-        ConfigHandler.reloadConfig();
-        sender.sendMessage(prefix + "Config reloaded");
+        ((Player) sender).setHealth(0);
+        sender.sendMessage(prefix + "You have died.");
         return true;
     }
 }

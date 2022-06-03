@@ -14,7 +14,6 @@ public class Fly implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
-        String permissionMessage = ChatColor.translateAlternateColorCodes('&', config.getString("PermissionMessage"));
         if (args.length > 0 && sender.hasPermission("usefulcommands.fly.others")) {
             try {
                 fly(Bukkit.getPlayer(args[0]));
@@ -22,15 +21,16 @@ public class Fly implements CommandExecutor {
             } catch (Exception e) {
                 sender.sendMessage(prefix + args[0] + " is not a valid player");
             }
-        } else if (sender instanceof Player && args.length == 0 && sender.hasPermission("usefulcommands.fly")) {
+        } else if (sender instanceof Player && args.length == 0) {
             fly((Player) sender);
         } else if (!(sender instanceof Player)) {
             sender.sendMessage(prefix + "You must be a player to use this command");
         } else {
-            sender.sendMessage(permissionMessage);
+            sender.sendMessage(prefix + "§cI'm sorry but you do not have permission to perform this command. Please contact the server administrator if you believe that this is in error.");
         }
         return true;
     }
+
     private void fly(Player target) {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
