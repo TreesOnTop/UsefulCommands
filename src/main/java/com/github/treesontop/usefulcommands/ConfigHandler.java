@@ -1,10 +1,10 @@
 package com.github.treesontop.usefulcommands;
 
+import java.io.File;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import java.io.File;
-
 public class ConfigHandler {
+
     private static YamlConfiguration config;
     private static YamlConfiguration data;
 

@@ -10,6 +10,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 public class Feed implements CommandExecutor {
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         YamlConfiguration config = ConfigHandler.getConfig();
@@ -26,7 +27,9 @@ public class Feed implements CommandExecutor {
         } else if (!(sender instanceof Player)) {
             sender.sendMessage(prefix + "You must be a player to use this command");
         } else {
-            sender.sendMessage(prefix + "§cI'm sorry but you do not have permission to perform this command. Please contact the server administrator if you believe that this is in error.");
+            sender.sendMessage(
+                "§cI'm sorry but you do not have permission to perform this command. Please contact the server administrator if you believe that this is in error."
+            );
         }
         return true;
     }
@@ -35,6 +38,7 @@ public class Feed implements CommandExecutor {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
         target.setFoodLevel(20);
+        target.setSaturation(20);
         target.sendMessage(prefix + "You have been fed");
     }
 }

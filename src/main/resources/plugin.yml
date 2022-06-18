@@ -1,50 +1,50 @@
 name: UsefulCommands
-version: '${project.version}'
+version: "${project.version}"
 main: com.github.treesontop.usefulcommands.UsefulCommands
 api-version: 1.13
-softdepend: [ LuckPerms ]
+softdepend: [LuckPerms]
 commands:
-  fly:
-    description: toggles flight for a player
-    usage: /fly [player]
-    permission: usefulcommands.fly
-  reload:
-    description: reloads the plugins config
-    usage: /reload
-    permission: usefulcommands.reload
-  broadcast:
-    description: broadcasts a message to all players
-    usage: /broadcast <message>
-    aliases: [ bc ]
-    permission: usefulcommands.broadcast
-  heal:
-    description: heals a player
-    usage: /heal [player]
-    permission: usefulcommands.heal
-  feed:
-    description: feeds a player
-    usage: /feed [player]
-    permission: usefulcommands.feed
-  clearchat:
-    description: clears the chat
-    usage: /clearchat
-    permission: usefulcommands.clearchat
-  enderchest:
-    description: opens the enderchest of a player
-    usage: /enderchest [player]
-    aliases: [ ec, echest ]
-    permission: usefulcommands.enderchest
-  repair:
-    description: repairs a player's item
-    usage: /repair
-    permission: usefulcommands.repair
-    aliases: [ repairall, fixall, fix ]
-  suicide:
-    description: kills the player
-    usage: /suicide
-    permission: usefulcommands.suicide
-  speed:
-    description: edits the player's speed
-    usage: /speed <number || player> [number]
-    permission: usefulcommands.speed
-    aliases: [ flyspeed, fs, walkspeed, ws ]
+    fly:
+        description: toggles flight for a player
+        usage: /fly [player]
+        permission: usefulcommands.fly
+    reload:
+        description: reloads the plugins config
+        usage: /reload
+        permission: usefulcommands.reload
+    broadcast:
+        description: broadcasts a message to all players
+        usage: /broadcast <message>
+        aliases: [bc]
+        permission: usefulcommands.broadcast
+    heal:
+        description: heals a player
+        usage: /heal [player]
+        permission: usefulcommands.heal
+    feed:
+        description: feeds a player
+        usage: /feed [player]
+        permission: usefulcommands.feed
+    clearchat:
+        description: clears the chat
+        usage: /clearchat
+        permission: usefulcommands.clearchat
+    enderchest:
+        description: opens the enderchest of a player
+        usage: /enderchest [player]
+        aliases: [ec, echest]
+        permission: usefulcommands.enderchest
+    repair:
+        description: repairs a player's item
+        usage: /repair
+        permission: usefulcommands.repair
+        aliases: [repairall, fixall, fix]
+    suicide:
+        description: kills the player
+        usage: /suicide
+        permission: usefulcommands.suicide
+    speed:
+        description: edits the player's speed
+        usage: /speed <number || player> [number]
+        permission: usefulcommands.speed
+        aliases: [flyspeed, fs, walkspeed, ws]

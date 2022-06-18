@@ -10,6 +10,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 public class Speed implements CommandExecutor {
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         YamlConfiguration config = ConfigHandler.getConfig();
@@ -20,6 +21,7 @@ public class Speed implements CommandExecutor {
                 speed = Float.parseFloat(args[1]);
                 if (speed < 0.0f || speed > 1.0f) {
                     sender.sendMessage(prefix + "Speed must be between 0.0 and 1.0.");
+                    return true;
                 }
             } catch (Exception e) {
                 sender.sendMessage(prefix + "Speed must be a number.");
@@ -49,13 +51,13 @@ public class Speed implements CommandExecutor {
             } catch (Exception e) {
                 sender.sendMessage(prefix + args[0] + " is not a valid player");
             }
-
         } else if (args.length > 0) {
             float speed;
             try {
                 speed = Float.parseFloat(args[0]);
                 if (speed < 0.0f || speed > 1.0f) {
                     sender.sendMessage(prefix + "Speed must be between 0.0 and 1.0.");
+                    return true;
                 }
             } catch (Exception e) {
                 sender.sendMessage(prefix + "Speed must be a number.");
@@ -81,4 +83,5 @@ public class Speed implements CommandExecutor {
         }
         return true;
     }
+
 }

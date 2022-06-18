@@ -1,10 +1,9 @@
 package com.github.treesontop.usefulcommands;
 
 import com.github.treesontop.usefulcommands.commands.*;
+import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.logging.Logger;
 
 public final class UsefulCommands extends JavaPlugin {
 

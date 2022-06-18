@@ -9,6 +9,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 public class Enderchest implements CommandExecutor {
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         YamlConfiguration config = ConfigHandler.getConfig();
@@ -24,7 +25,9 @@ public class Enderchest implements CommandExecutor {
                     sender.sendMessage(prefix + args[0] + " is not a valid player");
                 }
             } else {
-                sender.sendMessage("§cI'm sorry but you do not have permission to perform this command. Please contact the server administrator if you believe that this is in error.");
+                sender.sendMessage(
+                    "§cI'm sorry but you do not have permission to perform this command. Please contact the server administrator if you believe that this is in error."
+                );
             }
         } else {
             sender.sendMessage(prefix + "You must be a player to use this command");
