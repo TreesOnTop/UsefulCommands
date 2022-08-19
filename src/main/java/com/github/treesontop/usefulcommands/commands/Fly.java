@@ -18,9 +18,7 @@ public class Fly implements CommandExecutor {
         if (args.length > 0 && sender.hasPermission("usefulcommands.fly.others")) {
             try {
                 fly(Bukkit.getPlayer(args[0]));
-                sender.sendMessage(
-                    prefix + Bukkit.getPlayer(args[0]).getName() + "'s flight has been set to " + Bukkit.getPlayer(args[0]).getAllowFlight()
-                );
+                sender.sendMessage(prefix + Bukkit.getPlayer(args[0]).getName() + "'s flight has been set to " + Bukkit.getPlayer(args[0]).getAllowFlight());
             } catch (Exception e) {
                 sender.sendMessage(prefix + args[0] + " is not a valid player");
             }
@@ -29,9 +27,7 @@ public class Fly implements CommandExecutor {
         } else if (!(sender instanceof Player)) {
             sender.sendMessage(prefix + "You must be a player to use this command");
         } else {
-            sender.sendMessage(
-                "§cI'm sorry but you do not have permission to perform this command. Please contact the server administrator if you believe that this is in error."
-            );
+            sender.sendMessage("§cI'm sorry but you do not have permission to perform this command. Please contact the server administrator if you believe that this is in error.");
         }
         return true;
     }

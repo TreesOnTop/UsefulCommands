@@ -21,18 +21,10 @@ public class Broadcast implements CommandExecutor {
         } else {
             for (int x = 0; x < broadcast.size(); x++) {
                 int value = x;
-                Bukkit
-                    .getOnlinePlayers()
-                    .forEach(player ->
-                        player.sendMessage(
-                            ChatColor.translateAlternateColorCodes(
-                                '&',
-                                broadcast
-                                    .get(value)
-                                    .replace("<broadcast-message>", String.join(" ", args))
-                                    .replace("<broadcast-sender>", sender.getName())
-                            )
-                        )
+                Bukkit.getOnlinePlayers().forEach(player ->
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', broadcast.get(value)
+                                .replace("<broadcast-message>", String.join(" ", args))
+                                .replace("<broadcast-sender>", sender.getName())))
                     );
             }
         }
