@@ -1,7 +1,6 @@
 package com.github.treesontop.usefulcommands;
 
 import com.github.treesontop.usefulcommands.commands.*;
-import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,19 +11,9 @@ public final class UsefulCommands extends JavaPlugin {
     public static UsefulCommands getMainClass() {
         return mainClass;
     }
-
     @Override
     public void onEnable() {
-        Logger log = this.getLogger();
         mainClass = this;
-        if (String.valueOf(Bukkit.getServer()).contains("Spigot") && !String.valueOf(Bukkit.getServer()).contains("Paper")) {
-            log.warning("Warning");
-            log.warning("Spigot is not supported by UsefulCommands and may break");
-            log.warning("Parts of UsefulCommands may work but it's not guaranteed");
-            log.warning("To make guarantee compatibility you should switch to paper at");
-            log.warning("https://papermc.io/");
-            log.warning("Warning");
-        }
         ConfigHandler.reloadConfig();
         this.getCommand("fly").setExecutor(new Fly());
         this.getCommand("reload").setExecutor(new Reload());
