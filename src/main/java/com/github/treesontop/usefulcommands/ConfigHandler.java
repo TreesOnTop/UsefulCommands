@@ -1,27 +1,28 @@
 package com.github.treesontop.usefulcommands;
 
-import java.io.File;
 import org.bukkit.configuration.file.YamlConfiguration;
+
+import java.io.File;
 
 public class ConfigHandler {
 
+    public static YamlConfiguration cache;
     private static YamlConfiguration config;
-    private static YamlConfiguration data;
 
-    public static void readData() {
+    public static File getData() {
         File file = new File(UsefulCommands.getMainClass().getDataFolder(), "data.yml");
         if (!file.exists()) {
             UsefulCommands.getMainClass().saveResource("data.yml", true);
         }
-        data = YamlConfiguration.loadConfiguration(file);
+        return file;
     }
 
-    public static void saveData(YamlConfiguration data) {
-        try {
-            data.save(new File(UsefulCommands.getMainClass().getDataFolder(), "data.yml"));
-        } catch (Exception e) {
-            e.printStackTrace();
+    public static File getCache() {
+        File file = new File(UsefulCommands.getMainClass().getDataFolder(), "cache.yml");
+        if (!file.exists()) {
+            UsefulCommands.getMainClass().saveResource("cache.yml", true);
         }
+        return file;
     }
 
     public static void reloadConfig() {
@@ -35,9 +36,5 @@ public class ConfigHandler {
 
     public static YamlConfiguration getConfig() {
         return config;
-    }
-
-    public static YamlConfiguration getData() {
-        return data;
     }
 }

@@ -2,7 +2,10 @@ package com.github.treesontop.usefulcommands;
 
 import com.github.treesontop.usefulcommands.commands.*;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.IOException;
 
 public final class UsefulCommands extends JavaPlugin {
 
@@ -11,10 +14,12 @@ public final class UsefulCommands extends JavaPlugin {
     public static UsefulCommands getMainClass() {
         return mainClass;
     }
+
     @Override
     public void onEnable() {
         mainClass = this;
         ConfigHandler.reloadConfig();
+        ConfigHandler.cache = YamlConfiguration.loadConfiguration(ConfigHandler.getCache());
         this.getCommand("fly").setExecutor(new Fly());
         this.getCommand("reload").setExecutor(new Reload());
         this.getCommand("broadcast").setExecutor(new Broadcast());
@@ -26,5 +31,13 @@ public final class UsefulCommands extends JavaPlugin {
         this.getCommand("suicide").setExecutor(new Suicide());
         this.getCommand("speed").setExecutor(new Speed());
         Bukkit.getConsoleSender().sendMessage("UsefulCommands started");
+    }
+
+    @Override
+    public void onDisable() {
+        try {
+            ConfigHandler.cache.save(ConfigHandler.getCache());
+        } catch (IOException ignored) {
+        }
     }
 }

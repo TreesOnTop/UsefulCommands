@@ -1,13 +1,14 @@
 package com.github.treesontop.usefulcommands.commands;
 
 import com.github.treesontop.usefulcommands.ConfigHandler;
-import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
+
+import java.util.List;
 
 public class Broadcast implements CommandExecutor {
 
@@ -25,7 +26,7 @@ public class Broadcast implements CommandExecutor {
                         player.sendMessage(ChatColor.translateAlternateColorCodes('&', broadcast.get(value)
                                 .replace("<broadcast-message>", String.join(" ", args))
                                 .replace("<broadcast-sender>", sender.getName())))
-                    );
+                );
             }
         }
         return true;
