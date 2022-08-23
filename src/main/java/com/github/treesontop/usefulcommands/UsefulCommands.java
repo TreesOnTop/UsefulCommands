@@ -37,6 +37,7 @@ public final class UsefulCommands extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerDisconnect(), this);
         Bukkit.getConsoleSender().sendMessage("UsefulCommands started");
         Players = new ArrayList<>();
+        //test
     }
 
     @Override
