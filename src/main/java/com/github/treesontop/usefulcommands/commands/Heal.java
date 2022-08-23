@@ -16,19 +16,22 @@ public class Heal implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
-        if (args.length > 0 && sender.hasPermission("usefulcommands.heal.others")) {
-            try {
-                heal(Bukkit.getPlayer(args[0]));
-                sender.sendMessage(prefix + Bukkit.getPlayer(args[0]).getName() + " has been healed");
-            } catch (Exception e) {
-                sender.sendMessage(prefix + args[0] + " is not a valid player");
+        if (args.length > 0) {
+            if (!sender.hasPermission("usefulcommands.heal.others")) {
+                sender.sendMessage(prefix + "§cI'm sorry but you do not have permission to perform this command. Please contact the server administrator if you believe that this is in error.");
+                return true;
             }
-        } else if (sender instanceof Player && args.length == 0) {
-            heal((Player) sender);
-        } else if (!(sender instanceof Player)) {
-            sender.sendMessage(prefix + "You must be a player to use this command");
+            Player target = Bukkit.getPlayer(args[0]);
+            if (target != null) {
+                heal(target);
+                sender.sendMessage(prefix + "You have healed " + target.getName() + ".");
+            } else {
+                sender.sendMessage(prefix + "That player is not online.");
+            }
+        } else if (sender instanceof Player player) {
+            heal(player);
         } else {
-            sender.sendMessage("§cI'm sorry but you do not have permission to perform this command. Please contact the server administrator if you believe that this is in error.");
+            sender.sendMessage(prefix + "You must be a player to use this command");
         }
         return true;
     }

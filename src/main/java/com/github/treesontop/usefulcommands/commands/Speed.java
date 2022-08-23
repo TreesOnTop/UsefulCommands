@@ -30,7 +30,7 @@ public class Speed implements CommandExecutor {
         if (args.length > 0) {
             float speed;
             try {
-                speed = Float.parseFloat(args[args.length-1]);
+                speed = Float.parseFloat(args[args.length - 1]);
                 if (speed < 0.0f || speed > 1.0f) {
                     sender.sendMessage(prefix + "Speed must be between 0.0 and 1.0.");
                     return true;
@@ -54,8 +54,7 @@ public class Speed implements CommandExecutor {
                 }
                 return true;
             }
-            if (sender instanceof Player) {
-                Player player = (Player) sender;
+            if (sender instanceof Player player) {
                 if (label.equalsIgnoreCase("flyspeed") || label.equalsIgnoreCase("fs")) {
                     setSpeed(player, speed, "fly");
                 } else if (label.equalsIgnoreCase("walkspeed") || label.equalsIgnoreCase("ws")) {

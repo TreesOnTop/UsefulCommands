@@ -1,14 +1,18 @@
 package com.github.treesontop.usefulcommands;
 
 import com.github.treesontop.usefulcommands.commands.*;
+import com.github.treesontop.usefulcommands.events.PlayerDisconnect;
+import com.github.treesontop.usefulcommands.events.PlayerJoin;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.IOException;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class UsefulCommands extends JavaPlugin {
 
+    public static List<File> Players;
     private static UsefulCommands mainClass;
 
     public static UsefulCommands getMainClass() {
@@ -19,7 +23,6 @@ public final class UsefulCommands extends JavaPlugin {
     public void onEnable() {
         mainClass = this;
         ConfigHandler.reloadConfig();
-        ConfigHandler.cache = YamlConfiguration.loadConfiguration(ConfigHandler.getCache());
         this.getCommand("fly").setExecutor(new Fly());
         this.getCommand("reload").setExecutor(new Reload());
         this.getCommand("broadcast").setExecutor(new Broadcast());
@@ -30,14 +33,14 @@ public final class UsefulCommands extends JavaPlugin {
         this.getCommand("repair").setExecutor(new Repair());
         this.getCommand("suicide").setExecutor(new Suicide());
         this.getCommand("speed").setExecutor(new Speed());
+        Bukkit.getPluginManager().registerEvents(new PlayerJoin(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerDisconnect(), this);
         Bukkit.getConsoleSender().sendMessage("UsefulCommands started");
+        Players = new ArrayList<>();
     }
 
     @Override
     public void onDisable() {
-        try {
-            ConfigHandler.cache.save(ConfigHandler.getCache());
-        } catch (IOException ignored) {
-        }
+
     }
 }

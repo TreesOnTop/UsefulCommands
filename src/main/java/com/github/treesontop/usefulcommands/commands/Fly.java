@@ -15,19 +15,22 @@ public class Fly implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
-        if (args.length > 0 && sender.hasPermission("usefulcommands.fly.others")) {
-            try {
-                fly(Bukkit.getPlayer(args[0]));
-                sender.sendMessage(prefix + Bukkit.getPlayer(args[0]).getName() + "'s flight has been set to " + Bukkit.getPlayer(args[0]).getAllowFlight());
-            } catch (Exception e) {
-                sender.sendMessage(prefix + args[0] + " is not a valid player");
+        if (args.length > 0) {
+            if (!sender.hasPermission("usefulcommands.fly.others")) {
+                sender.sendMessage(prefix + "§cI'm sorry but you do not have permission to perform this command. Please contact the server administrator if you believe that this is in error.");
+                return true;
             }
-        } else if (sender instanceof Player && args.length == 0) {
-            fly((Player) sender);
-        } else if (!(sender instanceof Player)) {
-            sender.sendMessage(prefix + "You must be a player to use this command");
+            Player target = Bukkit.getPlayer(args[0]);
+            if (target != null) {
+                fly(target);
+                sender.sendMessage(prefix + target.getName() +"flight has been set to" + target.getAllowFlight() + ".");
+            } else {
+                sender.sendMessage(prefix + "That player is not online.");
+            }
+        } else if (sender instanceof Player player) {
+            fly(player);
         } else {
-            sender.sendMessage("§cI'm sorry but you do not have permission to perform this command. Please contact the server administrator if you believe that this is in error.");
+            sender.sendMessage(prefix + "You must be a player to use this command");
         }
         return true;
     }

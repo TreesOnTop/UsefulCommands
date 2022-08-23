@@ -14,13 +14,13 @@ public class Enderchest implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
-        if (sender instanceof Player) {
+        if (sender instanceof Player player) {
             if (args.length == 0) {
-                ((Player) sender).openInventory(((Player) sender).getEnderChest());
+                player.openInventory(player.getEnderChest());
             } else if (sender.hasPermission("usefulcommands.enderchest.others")) {
                 try {
                     Player target = sender.getServer().getPlayer(args[0]);
-                    ((Player) sender).openInventory(target.getEnderChest());
+                    player.openInventory(target.getEnderChest());
                 } catch (Exception e) {
                     sender.sendMessage(prefix + args[0] + " is not a valid player");
                 }
