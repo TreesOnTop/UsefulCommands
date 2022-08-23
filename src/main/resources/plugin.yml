@@ -43,6 +43,7 @@ commands:
     description: kills the player
     usage: /suicide
     permission: usefulcommands.suicide
+    aliases: [ kms ]
   speed:
     description: edits the player's speed
     usage: /speed <number || player> [number]

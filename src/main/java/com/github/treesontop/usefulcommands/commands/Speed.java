@@ -11,14 +11,26 @@ import org.bukkit.entity.Player;
 
 public class Speed implements CommandExecutor {
 
+    public static void setSpeed(Player player, float speed, String type) {
+        YamlConfiguration config = ConfigHandler.getConfig();
+        String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
+        if (type.equals("walk")) {
+            player.setWalkSpeed(speed);
+            player.sendMessage(prefix + "Your walk speed has been set to " + speed);
+        } else if (type.equals("fly")) {
+            player.setFlySpeed(speed);
+            player.sendMessage(prefix + "Your fly speed has been set to " + speed);
+        }
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
-        if (args.length > 1) {
+        if (args.length > 0) {
             float speed;
             try {
-                speed = Float.parseFloat(args[1]);
+                speed = Float.parseFloat(args[args.length-1]);
                 if (speed < 0.0f || speed > 1.0f) {
                     sender.sendMessage(prefix + "Speed must be between 0.0 and 1.0.");
                     return true;
@@ -27,61 +39,40 @@ public class Speed implements CommandExecutor {
                 sender.sendMessage(prefix + "Speed must be a number.");
                 return true;
             }
-            try {
-                Player target = Bukkit.getPlayer(args[0]);
-                if (label.equalsIgnoreCase("walkspeed") || label.equalsIgnoreCase("ws")) {
-                    target.setWalkSpeed(speed);
-                    sender.sendMessage(prefix + target.getName() + "'s walk speed has been set to " + speed);
-                    target.sendMessage(prefix + "Your walk speed has been  set to " + speed);
-                } else if (label.equalsIgnoreCase("flyspeed") || label.equalsIgnoreCase("fs")) {
-                    target.setFlySpeed(speed);
-                    sender.sendMessage(prefix + target.getName() + "'s fly speed has been set to " + speed);
-                    target.sendMessage(prefix + "Your fly speed has been  set to " + speed);
-                } else {
-                    if (target.isFlying()) {
-                        target.setFlySpeed(speed);
+            if (args.length > 1) {
+                try {
+                    Player target = Bukkit.getPlayer(args[0]);
+                    if (label.equalsIgnoreCase("flyspeed") || label.equalsIgnoreCase("fs")) {
+                        setSpeed(target, speed, "fly");
                         sender.sendMessage(prefix + target.getName() + "'s fly speed has been set to " + speed);
-                        target.sendMessage(prefix + "Your fly speed has been  set to " + speed);
                     } else {
-                        target.setWalkSpeed(speed);
+                        setSpeed(target, speed, "walk");
                         sender.sendMessage(prefix + target.getName() + "'s walk speed has been set to " + speed);
-                        target.sendMessage(prefix + "Your walk speed has been  set to " + speed);
+                    }
+                } catch (Exception ignored) {
+                    sender.sendMessage(prefix + "Player not found.");
+                }
+                return true;
+            }
+            if (sender instanceof Player) {
+                Player player = (Player) sender;
+                if (label.equalsIgnoreCase("flyspeed") || label.equalsIgnoreCase("fs")) {
+                    setSpeed(player, speed, "fly");
+                } else if (label.equalsIgnoreCase("walkspeed") || label.equalsIgnoreCase("ws")) {
+                    setSpeed(player, speed, "walk");
+                } else {
+                    if (player.isFlying()) {
+                        setSpeed(player, speed, "fly");
+                    } else {
+                        setSpeed(player, speed, "walk");
                     }
                 }
-            } catch (Exception e) {
-                sender.sendMessage(prefix + args[0] + " is not a valid player");
-            }
-        } else if (args.length > 0) {
-            float speed;
-            try {
-                speed = Float.parseFloat(args[0]);
-                if (speed < 0.0f || speed > 1.0f) {
-                    sender.sendMessage(prefix + "Speed must be between 0.0 and 1.0.");
-                    return true;
-                }
-            } catch (Exception e) {
-                sender.sendMessage(prefix + "Speed must be a number.");
-                return true;
-            }
-            if (label.equalsIgnoreCase("walkspeed") || label.equalsIgnoreCase("ws")) {
-                ((Player) sender).setWalkSpeed(speed);
-                sender.sendMessage(prefix + "Your walk speed has been set to " + speed);
-            } else if (label.equalsIgnoreCase("flyspeed") || label.equalsIgnoreCase("fs")) {
-                ((Player) sender).setFlySpeed(speed);
-                sender.sendMessage(prefix + "Your fly speed has been set to " + speed);
             } else {
-                if (((Player) sender).isFlying()) {
-                    ((Player) sender).setFlySpeed(speed);
-                    sender.sendMessage(prefix + "Your fly speed has been set to " + speed);
-                } else {
-                    ((Player) sender).setWalkSpeed(speed);
-                    sender.sendMessage(prefix + "Your walk speed has been set to " + speed);
-                }
+                sender.sendMessage(prefix + "You must be a player to use this command");
             }
         } else {
-            sender.sendMessage(prefix + "You must specify a speed.");
+            sender.sendMessage(prefix + "You must specify a player and a speed.");
         }
         return true;
     }
-
 }
