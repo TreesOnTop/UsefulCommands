@@ -49,8 +49,35 @@ commands:
     usage: /speed <number || player> [number]
     permission: usefulcommands.speed
     aliases: [ flyspeed, fs, walkspeed, ws ]
+  kickall:
+    description: Kicks all players from the server
+    usage: /kickall
+    permission: usefulcommands.kickall
+    aliases: [ kicka ]
+  tpall:
+    description: Tps all players of the server to you
+    usage: /tpall
+    permission: usefulcommands.tpall
+  gma:
+    description: Sets a player's gamemode to adventure mode
+    usage: /gma [player]
+    permission: usefulcommands.gma
+  gms:
+    description: Sets a player's gamemode to survival mode
+    usage: /gms [player]
+    permission: usefulcommands.gms
+  gmc:
+    description: Sets a player's gamemode to creative mode
+    usage: /gmc [player]
+    permission: usefulcommands.gmc
+  gmsp:
+    description: Sets a player's gamemode to spectator mode
+    usage: /gmsp [player]
+    ermission: usefulcommands.gmsp
+  tempban:
+    description: Bans a player temporarily
+    usage: /tempban <player> <duration> [reason]
   mute:
     description: mutes a player
     usage: /mute <time || player> [time]
     permission: usefulcommands.mute
-
