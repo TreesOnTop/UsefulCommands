@@ -14,7 +14,7 @@ public class KickAll implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
-        for (final Player player : Bukkit.getOnlinePlayers()) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
             if (player.hasPermission("usefulcommands.killall.exempt")) return true;
             player.kickPlayer("kickAll");
             sender.sendMessage(prefix + "Kicked all.");
