@@ -7,12 +7,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public final class UsefulCommands extends JavaPlugin {
 
-    public static List<File> Players;
+    public static HashMap<String, File> Players;
     private static UsefulCommands mainClass;
 
     public static UsefulCommands getMainClass() {
@@ -36,8 +35,6 @@ public final class UsefulCommands extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerJoin(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDisconnect(), this);
         Bukkit.getConsoleSender().sendMessage("UsefulCommands started");
-        Players = new ArrayList<>();
-        //test
     }
 
     @Override

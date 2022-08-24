@@ -23,7 +23,7 @@ public class Fly implements CommandExecutor {
             Player target = Bukkit.getPlayer(args[0]);
             if (target != null) {
                 fly(target);
-                sender.sendMessage(prefix + target.getName() +"flight has been set to" + target.getAllowFlight() + ".");
+                sender.sendMessage(prefix + target.getName() + "'s flight has been set to" + target.getAllowFlight() + ".");
             } else {
                 sender.sendMessage(prefix + "That player is not online.");
             }
