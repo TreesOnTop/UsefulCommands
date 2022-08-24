@@ -27,8 +27,7 @@ public class Fly implements CommandExecutor {
             } else {
                 sender.sendMessage(prefix + "That player is not online.");
             }
-        } else if (sender instanceof Player) {
-            Player player = (Player) sender;
+        } else if (sender instanceof Player player) {
             fly(player);
         } else {
             sender.sendMessage(prefix + "You must be a player to use this command");

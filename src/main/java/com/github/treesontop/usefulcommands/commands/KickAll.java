@@ -2,8 +2,8 @@ package com.github.treesontop.usefulcommands.commands;
 
 import com.github.treesontop.usefulcommands.ConfigHandler;
 import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -14,14 +14,10 @@ public class KickAll implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
-        if (!(sender instanceof Player)) {
-            sender.sendMessage(prefix + "You must be a player to use this command");
-        } else {
-            for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-                if (onlinePlayer.hasPermission("usefulcommands.killall.exempt")) return true;
-                onlinePlayer.kickPlayer("kickAll");
-                sender.sendMessage("Kicked All!");
-            }
+        for (final Player player : Bukkit.getOnlinePlayers()) {
+            if (player.hasPermission("usefulcommands.killall.exempt")) return true;
+            player.kickPlayer("kickAll");
+            sender.sendMessage(prefix + "Kicked all.");
         }
         return true;
     }

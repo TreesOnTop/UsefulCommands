@@ -2,8 +2,8 @@ package com.github.treesontop.usefulcommands.commands;
 
 import com.github.treesontop.usefulcommands.ConfigHandler;
 import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,19 +16,18 @@ public class Gmsp implements CommandExecutor {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
         if (args.length == 0) {
-            if (sender instanceof Player) {
-                Player player = (Player) sender;
+            if (sender instanceof Player player) {
                 player.setGameMode(GameMode.SPECTATOR);
-                sender.sendMessage(prefix + "Your gamemode was set to §espectator§r.");
+                sender.sendMessage(prefix + "Your gamemode was set to spectator.");
             } else {
-                sender.sendMessage(prefix + "You must be a player to use this command");
+                sender.sendMessage(prefix + "You must be a player to use this command.");
             }
         } else {
             Player p = Bukkit.getPlayer(args[0]);
             if (p != null) {
-                sender.sendMessage(prefix + p.getName() + "'s gamemode was set to §espectator§r.");
+                sender.sendMessage(prefix + p.getName() + "'s gamemode was set to spectator.");
             } else {
-                sender.sendMessage(prefix + args[0] + "was not found.");
+                sender.sendMessage(prefix + "That player is not online.");
             }
         }
         return true;

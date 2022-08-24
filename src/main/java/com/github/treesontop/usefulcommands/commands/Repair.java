@@ -14,8 +14,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class Repair implements CommandExecutor {
 
     public static void fix(ItemStack item) {
-        if (item.getItemMeta() instanceof Damageable) {
-            Damageable meta = (Damageable) item.getItemMeta();
+        if (item.getItemMeta() instanceof Damageable meta) {
             meta.setDamage(0);
             item.setItemMeta((ItemMeta) meta);
         }

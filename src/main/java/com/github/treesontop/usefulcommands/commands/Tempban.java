@@ -20,7 +20,7 @@ public class Tempban implements CommandExecutor {
         if (args.length > 0) {
             Player player = Bukkit.getPlayer(args[0]);
             String reason;
-            if(args.length > 2) {
+            if (args.length > 2) {
                 reason = args[2];
             } else {
                 reason = "Not Provided";
