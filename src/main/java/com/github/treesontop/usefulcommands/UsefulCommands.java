@@ -33,6 +33,13 @@ public final class UsefulCommands extends JavaPlugin {
         this.getCommand("repair").setExecutor(new Repair());
         this.getCommand("suicide").setExecutor(new Suicide());
         this.getCommand("speed").setExecutor(new Speed());
+        this.getCommand("kickall").setExecutor(new KickAll());
+        this.getCommand("tpall").setExecutor(new TpAll());
+        this.getCommand("gms").setExecutor(new Gms());
+        this.getCommand("gma").setExecutor(new Gma());
+        this.getCommand("gmsp").setExecutor(new Gmsp());
+        this.getCommand("gmc").setExecutor(new Gmc());
+        this.getCommand("tempban").setExecutor(new Tempban());
         Bukkit.getPluginManager().registerEvents(new PlayerJoin(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDisconnect(), this);
         Bukkit.getConsoleSender().sendMessage("UsefulCommands started");

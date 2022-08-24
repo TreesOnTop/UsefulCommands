@@ -14,7 +14,8 @@ public class Enderchest implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
-        if (sender instanceof Player player) {
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
             if (args.length == 0) {
                 player.openInventory(player.getEnderChest());
             } else if (sender.hasPermission("usefulcommands.enderchest.others")) {

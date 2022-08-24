@@ -54,7 +54,8 @@ public class Speed implements CommandExecutor {
                 }
                 return true;
             }
-            if (sender instanceof Player player) {
+            if (sender instanceof Player) {
+                Player player = (Player) sender;
                 if (label.equalsIgnoreCase("flyspeed") || label.equalsIgnoreCase("fs")) {
                     setSpeed(player, speed, "fly");
                 } else if (label.equalsIgnoreCase("walkspeed") || label.equalsIgnoreCase("ws")) {
