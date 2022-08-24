@@ -1,6 +1,7 @@
 package com.github.treesontop.usefulcommands.commands;
 
 import com.github.treesontop.usefulcommands.ConfigHandler;
+import com.github.treesontop.usefulcommands.UsefulCommands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -40,17 +41,15 @@ public class Speed implements CommandExecutor {
                 return true;
             }
             if (args.length > 1) {
-                try {
-                    Player target = Bukkit.getPlayer(args[0]);
-                    if (label.equalsIgnoreCase("flyspeed") || label.equalsIgnoreCase("fs")) {
-                        setSpeed(target, speed, "fly");
-                        sender.sendMessage(prefix + target.getName() + "'s fly speed has been set to " + speed);
+                if (sender.hasPermission("usefulcommands.speed.others")) {
+                    Player p = Bukkit.getPlayer(args[0]);
+                    if (p != null) {
+                        setSpeed(p, speed, args[1]);
                     } else {
-                        setSpeed(target, speed, "walk");
-                        sender.sendMessage(prefix + target.getName() + "'s walk speed has been set to " + speed);
+                        sender.sendMessage(prefix + "That player is not online.");
                     }
-                } catch (Exception ignored) {
-                    sender.sendMessage(prefix + "Player not found.");
+                } else {
+                    sender.sendMessage(UsefulCommands.getPermissionMessage());
                 }
                 return true;
             }

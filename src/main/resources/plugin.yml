@@ -3,6 +3,20 @@ version: "${project.version}"
 main: com.github.treesontop.usefulcommands.UsefulCommands
 api-version: 1.13
 softdepend: [ LuckPerms ]
+permissions:
+  usefulcommands.fly.others:
+    description: allows you to toggle flight for other players
+  usefulcommands.heal.others:
+    description: allows you to heal other players
+  usefulcommands.feed.others:
+    description: allows you to feed other players
+  usefulcommands.gamemode.others:
+    description: allows you to change the gamemode of other players
+  usefulcommands.enderchest.others:
+    description: allows you to open the enderchest of other players
+  usefulcommands.speed.others:
+    description: allows you to change the speed of other players
+
 commands:
   fly:
     description: toggles flight for a player
@@ -61,22 +75,27 @@ commands:
   gma:
     description: Sets a player's gamemode to adventure mode
     usage: /gma [player]
-    permission: usefulcommands.gma
+    permission: usefulcommands.gamemode.adventure
+    aliases: [ gamemodea, gmadventure ]
   gms:
     description: Sets a player's gamemode to survival mode
     usage: /gms [player]
-    permission: usefulcommands.gms
+    permission: usefulcommands.gamemode.survival
+    aliases: [ gamemodes, gmsurvival ]
   gmc:
     description: Sets a player's gamemode to creative mode
     usage: /gmc [player]
-    permission: usefulcommands.gmc
+    permission: usefulcommands.gamemode.creative
+    aliases: [ gamemodec, gmcreative ]
   gmsp:
     description: Sets a player's gamemode to spectator mode
     usage: /gmsp [player]
-    ermission: usefulcommands.gmsp
+    permission: usefulcommands.gamemode.spectator
+    aliases: [ gamemodesp, gmspectator ]
   tempban:
     description: Bans a player temporarily
     usage: /tempban <player> <duration> [reason]
+    permission: usefulcommands.tempban
   mute:
     description: mutes a player
     usage: /mute <time || player> [time]
