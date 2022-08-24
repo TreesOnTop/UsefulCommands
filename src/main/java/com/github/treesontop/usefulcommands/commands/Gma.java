@@ -1,6 +1,7 @@
 package com.github.treesontop.usefulcommands.commands;
 
 import com.github.treesontop.usefulcommands.ConfigHandler;
+import com.github.treesontop.usefulcommands.UsefulCommands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -15,20 +16,23 @@ public class Gma implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
-        if (args.length == 0) {
-            if (sender instanceof Player player) {
-                player.setGameMode(GameMode.ADVENTURE);
-                sender.sendMessage(prefix + "Your gamemode was set to adventure.");
-            } else {
-                sender.sendMessage(prefix + "You must be a player to use this command.");
+        if (args.length > 0) {
+            if (!sender.hasPermission("usefulcommands.gamemode.others")) {
+                sender.sendMessage(UsefulCommands.getPermissionMessage());
+                return true;
             }
-        } else {
             Player p = Bukkit.getPlayer(args[0]);
             if (p != null) {
-                sender.sendMessage(prefix + p.getName() + "'s gamemode was set to adventur.");
+                sender.sendMessage(prefix + p.getName() + "'s gamemode was set to adventure.");
+                p.sendMessage(prefix + "Your gamemode was set to adventure.");
             } else {
                 sender.sendMessage(prefix + "That player is not online.");
             }
+        } else if (sender instanceof Player player) {
+            player.setGameMode(GameMode.ADVENTURE);
+            sender.sendMessage(prefix + "Your gamemode was set to adventure.");
+        } else {
+            sender.sendMessage(prefix + "You must be a player to use this command.");
         }
         return true;
     }

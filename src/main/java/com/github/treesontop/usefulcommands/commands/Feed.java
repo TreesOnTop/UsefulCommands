@@ -1,6 +1,7 @@
 package com.github.treesontop.usefulcommands.commands;
 
 import com.github.treesontop.usefulcommands.ConfigHandler;
+import com.github.treesontop.usefulcommands.UsefulCommands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -17,7 +18,7 @@ public class Feed implements CommandExecutor {
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
         if (args.length > 0) {
             if (!sender.hasPermission("usefulcommands.feed.others")) {
-                sender.sendMessage(prefix + "§cI'm sorry but you do not have permission to perform this command. Please contact the server administrator if you believe that this is in error.");
+                sender.sendMessage(UsefulCommands.getPermissionMessage());
                 return true;
             }
             Player target = Bukkit.getPlayer(args[0]);
