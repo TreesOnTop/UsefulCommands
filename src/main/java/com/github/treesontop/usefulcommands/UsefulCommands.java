@@ -1,6 +1,7 @@
 package com.github.treesontop.usefulcommands;
 
 import com.github.treesontop.usefulcommands.commands.*;
+import com.github.treesontop.usefulcommands.events.AsyncChat;
 import com.github.treesontop.usefulcommands.events.PlayerDisconnect;
 import com.github.treesontop.usefulcommands.events.PlayerJoin;
 import org.bukkit.Bukkit;
@@ -11,7 +12,7 @@ import java.util.HashMap;
 
 public final class UsefulCommands extends JavaPlugin {
 
-    public static HashMap<String, File> Players;
+    public static HashMap<String, File> Players = new HashMap<>();
     private static UsefulCommands mainClass;
 
     public static UsefulCommands getMainClass() {
@@ -32,8 +33,10 @@ public final class UsefulCommands extends JavaPlugin {
         this.getCommand("repair").setExecutor(new Repair());
         this.getCommand("suicide").setExecutor(new Suicide());
         this.getCommand("speed").setExecutor(new Speed());
+        this.getCommand("mute").setExecutor(new Mute());
         Bukkit.getPluginManager().registerEvents(new PlayerJoin(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDisconnect(), this);
+        Bukkit.getPluginManager().registerEvents(new AsyncChat(), this);
         Bukkit.getConsoleSender().sendMessage("UsefulCommands started");
     }
 

@@ -49,3 +49,8 @@ commands:
     usage: /speed <number || player> [number]
     permission: usefulcommands.speed
     aliases: [ flyspeed, fs, walkspeed, ws ]
+  mute:
+    description: mutes a player
+    usage: /mute <time || player> [time]
+    permission: usefulcommands.mute
+
