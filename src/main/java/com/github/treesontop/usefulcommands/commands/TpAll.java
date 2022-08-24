@@ -17,7 +17,7 @@ public class TpAll implements CommandExecutor {
         if (!(sender instanceof Player)) {
             sender.sendMessage(prefix + "You must be a player to use this command");
         } else {
-            for(final Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+            for(Player onlinePlayer : Bukkit.getOnlinePlayers()) {
                 onlinePlayer.teleport(((Player) sender).getLocation());
             }
         }

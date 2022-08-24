@@ -25,7 +25,7 @@ public class Tempban implements CommandExecutor {
             } else {
                 reason = "Not Provided";
             }
-            long time = Duration.parse("PT" + args[1]).toSeconds();
+            long time = Duration.parse("PT" + args[1]).toMillis();
             player.banPlayer(reason, new Date(time + new Date().getTime()), sender.getName(), true);
             sender.sendMessage(prefix + args[0] + "was banned for" + reason + "for" + Duration.parse("PT" + args[1] + "."));
         }

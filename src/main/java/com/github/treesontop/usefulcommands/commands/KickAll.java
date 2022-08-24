@@ -17,7 +17,7 @@ public class KickAll implements CommandExecutor {
         if (!(sender instanceof Player)) {
             sender.sendMessage(prefix + "You must be a player to use this command");
         } else {
-            for (final Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+            for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
                 if (onlinePlayer.hasPermission("usefulcommands.killall.exempt")) return true;
                 onlinePlayer.kickPlayer("kickAll");
                 sender.sendMessage("Kicked All!");
