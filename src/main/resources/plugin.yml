@@ -77,3 +77,7 @@ commands:
   tempban:
     description: Bans a player temporarily
     usage: /tempban <player> <duration> [reason]
+  mute:
+    description: mutes a player
+    usage: /mute <time || player> [time]
+    permission: usefulcommands.mute

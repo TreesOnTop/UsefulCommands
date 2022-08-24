@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 public class PlayerJoin implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        UsefulCommands.Players.add(ConfigHandler.getPlayerData(event.getPlayer().getUniqueId().toString()));
+        UsefulCommands.Players.put(event.getPlayer().getUniqueId().toString(),
+            ConfigHandler.getPlayerData(event.getPlayer().getUniqueId().toString()));
     }
 }

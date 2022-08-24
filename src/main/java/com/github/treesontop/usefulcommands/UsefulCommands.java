@@ -1,18 +1,18 @@
 package com.github.treesontop.usefulcommands;
 
 import com.github.treesontop.usefulcommands.commands.*;
+import com.github.treesontop.usefulcommands.events.AsyncChat;
 import com.github.treesontop.usefulcommands.events.PlayerDisconnect;
 import com.github.treesontop.usefulcommands.events.PlayerJoin;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public final class UsefulCommands extends JavaPlugin {
 
-    public static List<File> Players;
+    public static HashMap<String, File> Players = new HashMap<>();
     private static UsefulCommands mainClass;
 
     public static UsefulCommands getMainClass() {
@@ -40,10 +40,11 @@ public final class UsefulCommands extends JavaPlugin {
         this.getCommand("gmsp").setExecutor(new Gmsp());
         this.getCommand("gmc").setExecutor(new Gmc());
         this.getCommand("tempban").setExecutor(new Tempban());
+        this.getCommand("mute").setExecutor(new Mute());
         Bukkit.getPluginManager().registerEvents(new PlayerJoin(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDisconnect(), this);
+        Bukkit.getPluginManager().registerEvents(new AsyncChat(), this);
         Bukkit.getConsoleSender().sendMessage("UsefulCommands started");
-        Players = new ArrayList<>();
     }
 
     @Override
