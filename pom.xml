@@ -59,6 +59,5 @@
             <artifactId>adventure-text-serializer-legacy</artifactId>
             <version>4.11.0</version>
         </dependency>
-
     </dependencies>
 </project>
