@@ -1,7 +1,7 @@
 name: UsefulCommands
 version: "${project.version}"
 main: com.github.treesontop.usefulcommands.UsefulCommands
-api-version: 1.13
+api-version: 1.16
 softdepend: [ LuckPerms ]
 permissions:
   usefulcommands.fly.others:
