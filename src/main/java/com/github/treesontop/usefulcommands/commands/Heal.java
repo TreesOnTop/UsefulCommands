@@ -1,7 +1,6 @@
 package com.github.treesontop.usefulcommands.commands;
 
 import com.github.treesontop.usefulcommands.ConfigHandler;
-import com.github.treesontop.usefulcommands.UsefulCommands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
@@ -19,20 +18,21 @@ public class Heal implements CommandExecutor {
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
         if (args.length > 0) {
             if (!sender.hasPermission("usefulcommands.heal.others")) {
-                sender.sendMessage(UsefulCommands.getPermissionMessage());
+                sender.sendMessage(command.getPermissionMessage());
                 return true;
             }
-            Player target = Bukkit.getPlayer(args[0]);
-            if (target != null) {
-                target.setHealth(target.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
-                target.sendMessage(prefix + "You have been healed");
-                sender.sendMessage(prefix + "You have healed " + target.getName() + ".");
+            Player p = Bukkit.getPlayer(args[0]);
+            if (p != null) {
+                p.setHealth(p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+                p.sendMessage(prefix + "You have been healed");
+                sender.sendMessage(prefix + "You have healed " + p.getName() + ".");
             } else {
                 sender.sendMessage(prefix + "That player is not online.");
             }
-        } else if (sender instanceof Player player) {
-            player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
-            player.sendMessage(prefix + "You have been healed");
+        } else if (sender instanceof Player) {
+            Player p = (Player) sender;
+            p.setHealth(p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+            p.sendMessage(prefix + "You have been healed");
         } else {
             sender.sendMessage(prefix + "You must be a player to use this command");
         }

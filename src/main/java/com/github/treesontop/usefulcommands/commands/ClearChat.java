@@ -15,9 +15,9 @@ public class ClearChat implements CommandExecutor {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
         for (int x = 0; x < 100; x++) {
-            Bukkit.getOnlinePlayers().forEach(player -> player.sendMessage(""));
+            Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(""));
         }
-        Bukkit.getOnlinePlayers().forEach(player -> player.sendMessage(prefix + "Chat cleared by " + sender.getName()));
+        Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(prefix + "Chat cleared by " + sender.getName()));
         return true;
     }
 }

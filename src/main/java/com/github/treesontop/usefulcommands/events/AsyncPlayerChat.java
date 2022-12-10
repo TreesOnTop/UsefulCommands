@@ -2,19 +2,19 @@ package com.github.treesontop.usefulcommands.events;
 
 import com.github.treesontop.usefulcommands.ConfigHandler;
 import com.github.treesontop.usefulcommands.UsefulCommands;
-import io.papermc.paper.event.player.AsyncChatEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import java.io.File;
 import java.util.Date;
 
-public class AsyncChat implements Listener {
+public class AsyncPlayerChat implements Listener {
     @EventHandler
-    public void onAsyncChat(AsyncChatEvent event) {
+    public void onAsyncPlayerChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));

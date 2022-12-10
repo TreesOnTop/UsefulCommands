@@ -14,8 +14,8 @@ public class Suicide implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
-        if (sender instanceof Player player) {
-            player.setHealth(0);
+        if (sender instanceof Player) {
+            ((Player)sender).setHealth(0);
             sender.sendMessage(prefix + "You have died.");
         } else {
             sender.sendMessage(prefix + "bro how tf is console going to kill itself");

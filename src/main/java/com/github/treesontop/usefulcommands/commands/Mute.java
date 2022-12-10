@@ -21,16 +21,16 @@ public class Mute implements CommandExecutor {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
         if (args.length > 0) {
-            Player target;
+            Player p;
             try {
-                target = Bukkit.getPlayer(args[0]);
+                p = Bukkit.getPlayer(args[0]);
             } catch (NullPointerException e) {
                 sender.sendMessage(prefix + "Player not found.");
                 return true;
             }
-            File playerDataFile = UsefulCommands.Players.get(target.getUniqueId().toString());
+            File playerDataFile = UsefulCommands.Players.get(p.getUniqueId().toString());
             YamlConfiguration playerData = YamlConfiguration.loadConfiguration(playerDataFile);
-            if (target == null) {
+            if (p == null) {
                 sender.sendMessage(prefix + "Player not found.");
                 return true;
             }
@@ -47,8 +47,8 @@ public class Mute implements CommandExecutor {
             }
             try {
                 playerData.save(playerDataFile);
-                UsefulCommands.Players.replace(target.getUniqueId().toString(), playerDataFile);
-                sender.sendMessage(prefix + target.getName() + " has been muted.");
+                UsefulCommands.Players.replace(p.getUniqueId().toString(), playerDataFile);
+                sender.sendMessage(prefix + p.getName() + " has been muted.");
             } catch (IOException ignored) {
                 sender.sendMessage(prefix + "Error saving player data.");
             }

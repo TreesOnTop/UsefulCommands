@@ -22,10 +22,11 @@ commands:
     description: toggles flight for a player
     usage: /fly [player]
     permission: usefulcommands.fly
-  reload:
-    description: reloads the plugins config
-    usage: /reload
-    permission: usefulcommands.reload
+  usefulcommands:
+    description: Allows you to manage the plugin like reloading the config
+    usage: /usefulcommands <string>
+    permission: usefulcommands.usefulcommands
+    aliases: [ uc ]
   broadcast:
     description: broadcasts a message to all players
     usage: /broadcast <message>

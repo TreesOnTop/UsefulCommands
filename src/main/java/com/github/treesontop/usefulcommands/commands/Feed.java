@@ -1,7 +1,6 @@
 package com.github.treesontop.usefulcommands.commands;
 
 import com.github.treesontop.usefulcommands.ConfigHandler;
-import com.github.treesontop.usefulcommands.UsefulCommands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -18,7 +17,7 @@ public class Feed implements CommandExecutor {
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
         if (args.length > 0) {
             if (!sender.hasPermission("usefulcommands.feed.others")) {
-                sender.sendMessage(UsefulCommands.getPermissionMessage());
+                sender.sendMessage(command.getPermissionMessage());
                 return true;
             }
             Player target = Bukkit.getPlayer(args[0]);
@@ -28,8 +27,8 @@ public class Feed implements CommandExecutor {
             } else {
                 sender.sendMessage(prefix + "That player is not online.");
             }
-        } else if (sender instanceof Player player) {
-            feed(player);
+        } else if (sender instanceof Player) {
+            feed((Player) sender);
         } else {
             sender.sendMessage(prefix + "You must be a player to use this command");
         }

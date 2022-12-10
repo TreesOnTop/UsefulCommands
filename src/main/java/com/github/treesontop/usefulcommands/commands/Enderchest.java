@@ -1,7 +1,6 @@
 package com.github.treesontop.usefulcommands.commands;
 
 import com.github.treesontop.usefulcommands.ConfigHandler;
-import com.github.treesontop.usefulcommands.UsefulCommands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -16,12 +15,13 @@ public class Enderchest implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
-        if (!(sender instanceof Player player)) {
+        if (!(sender instanceof Player)) {
             sender.sendMessage(prefix + "You must be a player to use this command");
             return true;
         }
+        Player p = (Player) sender;
         if (args.length == 0) {
-            player.openInventory(player.getEnderChest());
+            p.openInventory(p.getEnderChest());
         } else if (sender.hasPermission("usefulcommands.enderchest.others")) {
             Player target = Bukkit.getPlayer(args[0]);
             if (target != null) {
@@ -30,7 +30,7 @@ public class Enderchest implements CommandExecutor {
                 sender.sendMessage(prefix + "That player is not online.");
             }
         } else {
-            sender.sendMessage(UsefulCommands.getPermissionMessage());
+            sender.sendMessage(command.getPermissionMessage());
         }
         return true;
     }

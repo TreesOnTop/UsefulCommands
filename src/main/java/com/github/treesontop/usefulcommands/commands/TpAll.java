@@ -14,9 +14,9 @@ public class TpAll implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
-        if (sender instanceof Player player) {
+        if (sender instanceof Player) {
             for (Player p : Bukkit.getOnlinePlayers()) {
-                p.teleport(player.getLocation());
+                p.teleport(((Player)sender).getLocation());
             }
         } else {
             sender.sendMessage(prefix + "You must be a player to use this command.");

@@ -1,6 +1,7 @@
 package com.github.treesontop.usefulcommands.commands;
 
 import com.github.treesontop.usefulcommands.ConfigHandler;
+import org.bukkit.BanList.Type;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -18,7 +19,7 @@ public class Tempban implements CommandExecutor {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
         if (args.length > 0) {
-            Player player = Bukkit.getPlayer(args[0]);
+            Player p = Bukkit.getPlayer(args[0]);
             String reason;
             if (args.length > 2) {
                 reason = args[2];
@@ -26,7 +27,7 @@ public class Tempban implements CommandExecutor {
                 reason = "Not Provided";
             }
             long time = Duration.parse("PT" + args[1]).toMillis();
-            player.banPlayer(reason, new Date(time + new Date().getTime()), sender.getName(), true);
+            Bukkit.getBanList(Type.NAME).addBan(p.getName(), reason, new Date(System.currentTimeMillis() + time), sender.getName());
             sender.sendMessage(prefix + args[0] + "was banned for" + reason + "for" + Duration.parse("PT" + args[1] + "."));
         }
         return true;
