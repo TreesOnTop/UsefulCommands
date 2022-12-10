@@ -16,6 +16,10 @@ permissions:
     description: allows you to open the enderchest of other players
   usefulcommands.speed.others:
     description: allows you to change the speed of other players
+  usefulcommands.god.others:
+    description: allows you to toggle god mode for other players
+  usefulcommands.freeze.bypass:
+    description: allows you to bypass being freezed
 
 commands:
   fly:
@@ -101,3 +105,12 @@ commands:
     description: mutes a player
     usage: /mute <time || player> [time]
     permission: usefulcommands.mute
+  god:
+    description: toggles god mode for a player
+    usage: /god [player]
+    permission: usefulcommands.god
+  freeze:
+    description: freezes a player
+    usage: /freeze <player>
+    permission: usefulcommands.freeze
+

@@ -21,7 +21,7 @@ public class ConfigHandler {
         return file;
     }*/
 
-    public static File getPlayerData(String uuid) {
+    /*public static File getPlayerData(String uuid) {
         File path = new File(UsefulCommands.getMainClass().getDataFolder() + File.separator + "PlayerData");
         File file = new File(path, uuid + ".yml");
         if (!path.exists()) {
@@ -44,7 +44,7 @@ public class ConfigHandler {
             }
         }
         return file;
-    }
+    }*/
 
     public static void reloadConfig() {
         File configFile = new File(UsefulCommands.getMainClass().getDataFolder(), "config.yml");

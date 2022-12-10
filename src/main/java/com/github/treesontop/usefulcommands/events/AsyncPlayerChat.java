@@ -2,6 +2,8 @@ package com.github.treesontop.usefulcommands.events;
 
 import com.github.treesontop.usefulcommands.ConfigHandler;
 import com.github.treesontop.usefulcommands.UsefulCommands;
+import com.github.treesontop.usefulcommands.UserHandler;
+import com.github.treesontop.usefulcommands.classes.User;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -18,9 +20,8 @@ public class AsyncPlayerChat implements Listener {
         Player player = event.getPlayer();
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
-        File playerDataFile = UsefulCommands.Players.get(player.getUniqueId().toString());
-        YamlConfiguration playerData = YamlConfiguration.loadConfiguration(playerDataFile);
-        if (playerData.getLong("muted") > new Date().getTime()) {
+        User u = UserHandler.getUser(event.getPlayer());
+        if (u.getMuted() > new Date().getTime()) {
             event.setCancelled(true);
             player.sendMessage(prefix + "You are muted.");
         }

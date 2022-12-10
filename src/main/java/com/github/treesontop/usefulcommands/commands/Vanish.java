@@ -2,6 +2,8 @@ package com.github.treesontop.usefulcommands.commands;
 
 import com.github.treesontop.usefulcommands.ConfigHandler;
 import com.github.treesontop.usefulcommands.UsefulCommands;
+import com.github.treesontop.usefulcommands.UserHandler;
+import com.github.treesontop.usefulcommands.classes.User;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -40,10 +42,9 @@ public class Vanish implements CommandExecutor {
     private void vanish(Player player) {
         YamlConfiguration config = ConfigHandler.getConfig();
         String prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Prefix"));
-        File playerDataFile = UsefulCommands.Players.get(player.getUniqueId().toString());
-        YamlConfiguration playerData = YamlConfiguration.loadConfiguration(playerDataFile);
-        playerData.set("vanished", !playerData.getBoolean("vanished"));
-        if (playerData.getBoolean("vanished")) {
+        User u = UserHandler.getUser(player);
+        u.setVanished(!u.isVanished());
+        if (u.isVanished()) {
             player.sendMessage(prefix + "You are now vanished.");
             for (Player p : Bukkit.getOnlinePlayers()) {
                 p.hidePlayer(UsefulCommands.getMainClass(), player);
